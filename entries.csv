@@ -1,26 +1,62 @@
-start_time;end_time;location;cloud_cover;transparency;seeing;moon_phase;wind_speed;wind_direction;temperature;dew_point;objects
-2021-01-30 20:00;2021-01-30 21:15;backyard;4;average;;below average;9;W;-19;-22;Mars,M45,M42,M43
-2021-01-31 19:50;2021-01-31 20:50;backyard;0;average;below average;;5;N;-22;-25;
-2021-02-04 20:45;2021-02-04 22:20;backyard;0;average;below average;;12;W;-6;-7;M42,NGC 2244,Mars
-2021-02-26 20:30;2021-02-26 21:40;backyard;0;average;below average;;9;SE;-10;-13;M42,M45,Mars,Moon
-2021-03-07 20:40;2021-03-07 21:45;backyard;0;average;below average;waning crescent;12;W;-11;-14;M42,Mars
-2021-03-09 21:10;2021-03-09 23:00;backyard;0;average;below average;waning crescent;4;W;-8;-9;
-2021-03-19 13:10;2021-03-19 15:15;backyard;0;below average;average;waxing crescent;9;NW;-2;-15;Sun,Moon
-2021-03-21 21:00;2021-03-21 23:45;backyard;0;excellent;above average;waxing gibbous;5;S;-3;-4;M42,Moon
-2021-03-22 21:05;2021-03-22 23:45;backyard;0;above average;average;waxing gibbous;8;S;-1;-2;M45,Moon
-2021-04-08 21:40;2021-04-08 23:55;backyard;0;below average;above average;waning crescent;11;NE;11;6;Mars,M44,Polaris
-2021-04-09 11:15;2021-04-09 12:20;backyard;0;below average;excellent;waning crescent;3;SE;15;5;Sun
-2021-05-21 21:50;2021-05-21 22:55;backyard;2;above average;average;waxing gibbous;6;SW;15;2;Moon
-2021-05-29 21:43;2021-05-29 23:19;backyard;0;above average;below average;waning gibbous;10;NE;11;-3;
-2021-06-20 19:00;;backyard;0;;;waxing gibbous;;;;;Sun,Moon
-2021-06-23 17:30;2021-06-23 18:38;backyard;0;average;below average;waxing gibbous;13;W;19;7;Sun
-2021-06-23 21:45;;backyard;0;below average;below average;waxing gibbous;14;SW;18;7;M13
-2021-08-14 21:20;2021-08-15 00:10;backyard;0;average;below average;waxing crescent;11;W;20;10;M13,M92,Jupiter,Saturn
-2021-08-30 21:40;2021-08-31 1:04;backyard;11;average;below average;waning crescent;8;W;17;12;Jupiter,Saturn,M13,M57,M27,Albireo
-2021-09-01 21:25;2021-09-01 23:00;backyard;7;excellent;average;waning crescent;4;NW;12;-5;Mizar,Jupiter
-2021-09-03 21:25;2021-09-04 00:25;backyard;0;below average;below average;waning crescent;14;NW;19;11;Jupiter,Saturn,M13,M92,M57,M31,M32
-2021-09-16 20:36;2021-09-16 23:20;backyard;0;above average;average;waxing gibbous;7;E;16;11;Jupiter,Saturn,M13,Moon
-2021-09-21 20:50;2021-09-21 23:35;backyard;0;below average;average;waxing gibbous;4;;15;8;Jupiter,Saturn,M13,M57,Epsilon Lyrae,Struve 2470,Struve 2474
-2021-10-05 21:00;2021-10-05 23:05;backyard;2;average;above average;new moon;1;W;14;11;Jupiter,Saturn,M57,Otto Struve 525
-2021-10-06 20:58;2021-10-06 23:45;backyard;0;average;above average;new moon;3;SW;13;10;Jupiter,Saturn,M13,NGC 225,NGC 457,NGC 436,NGC 129,M31,M32
-2021-10-07 21:08;2021-10-08 00:45;backyard;0;average;average;waxing crescent;7;W;13;10;Jupiter,Saturn,NGC 7789,M103,Struve 131,NGC 869,NGC 884,Miram,M45,M31,M32
+start_time;end_time;location;cloud_cover;transparency;seeing;moon_phase;wind_speed;wind_direction;temperature;feels_like_temperature;dew_point;objects
+2021-01-30 20:00;2021-01-30 21:15;backyard;4;average;below average;;9;W;-19;-22;;Mars, M45, M42, M43
+2021-01-31 19:50;2021-01-31 20:50;backyard;0;average;below average;;5;N;-22;-25;;
+2021-02-04 20:45;2021-02-04 22:20;backyard;0;average;below average;;12;W;-6;-7;;M42, NGC 2244, Mars
+2021-02-26 20:30;2021-02-26 21:40;backyard;0;average;below average;;9;SE;-10;-13;;M42, M45, Mars, Moon
+2021-03-07 20:40;2021-03-07 21:45;backyard;0;average;below average;waning crescent;12;W;-11;-14;;M42, Mars
+2021-03-09 21:10;2021-03-09 23:00;backyard;0;average;below average;waning crescent;4;W;-8;-9;;
+2021-03-19 13:10;2021-03-19 15:15;backyard;0;below average;average;waxing crescent;9;NW;-2;-15;;Sun, Moon
+2021-03-21 21:00;2021-03-21 23:45;backyard;0;excellent;above average;waxing gibbous;5;S;-3;-4;;M42, Moon
+2021-03-22 21:05;2021-03-22 23:45;backyard;0;above average;average;waxing gibbous;8;S;-1;-2;;M45, Moon
+2021-04-08 21:40;2021-04-08 23:55;backyard;0;below average;above average;waning crescent;11;NE;11;6;;Mars, M44, Polaris
+2021-04-09 11:15;2021-04-09 12:20;backyard;0;below average;excellent;waning crescent;3;SE;15;5;;Sun
+2021-05-21 21:50;2021-05-21 22:55;backyard;2;above average;average;waxing gibbous;6;SW;15;2;;Moon
+2021-05-29 21:43;2021-05-29 23:19;backyard;0;above average;below average;waning gibbous;10;NE;11;-3;;
+2021-06-20 19:00;;backyard;0;;;waxing gibbous;;;;;;Sun, Moon
+2021-06-23 17:30;2021-06-23 18:38;backyard;0;average;below average;waxing gibbous;13;W;19;7;;Sun
+2021-06-23 21:45;;backyard;0;below average;below average;waxing gibbous;14;SW;18;7;;M13
+2021-08-14 21:20;2021-08-15 00:10;backyard;0;average;below average;waxing crescent;11;W;20;10;;M13, M92, Jupiter, Saturn
+2021-08-30 21:40;2021-08-31 1:04;backyard;11;average;below average;waning crescent;8;W;17;12;;Jupiter, Saturn, M13, M57, M27, Albireo
+2021-09-01 21:25;2021-09-01 23:00;backyard;7;excellent;average;waning crescent;4;NW;12;-5;;Mizar, Jupiter
+2021-09-03 21:25;2021-09-04 00:25;backyard;0;below average;below average;waning crescent;14;NW;19;11;;Jupiter, Saturn, M13, M92, M57, M31, M32
+2021-09-16 20:36;2021-09-16 23:20;backyard;0;above average;average;waxing gibbous;7;E;16;11;;Jupiter, Saturn, M13, Moon
+2021-09-21 20:50;2021-09-21 23:35;backyard;0;below average;average;waxing gibbous;4;;15;8;;Jupiter, Saturn, M13, M57, Epsilon Lyrae, Struve 2470, Struve 2474
+2021-10-05 21:00;2021-10-05 23:05;backyard;2;average;above average;new moon;1;W;14;11;;Jupiter, Saturn, M57, Otto Struve 525
+2021-10-06 20:58;2021-10-06 23:45;backyard;0;average;above average;new moon;3;SW;13;10;;Jupiter, Saturn, M13, NGC 225, NGC 457, NGC 436, NGC 129, M31, M32
+2021-10-07 21:08;2021-10-08 00:45;backyard;0;average;average;waxing crescent;7;W;13;10;;Jupiter, Saturn, NGC 7789, M103, Struve 131, NGC 869, NGC 884, Miram, M45, M31, M32
+2022-01-20 19:00;2022-01-20 20:24;backyard;0;average;below average;waning gibbous;11;W;-19;-27;-23;M42, M45
+2022-01-21 19:35;2022-01-21 20:55;backyard;0;above average;average;waning gibbous;4;S;-26;-23;-29;M45, M31, Beta Monocerotis, M42
+2022-01-23 20:07;2022-01-23 21:55;backyard;0;average;average;waning gibbous;7;W;-15;-22;-22;M44, M42
+2022-03-22 20:27;2022-03-22 22:30;backyard;0;average;below average;waning gibbous;10;N;1;-4;-9;M42, M45, M44, M36, ISS
+2022-04-20 21:10;2022-04-20 22:50;backyard;0;average;below average;waning gibbous;2;W;5;3;-5;M44, M65, M66, M105, NGC 3384, M96
+2022-04-28 21:18;2022-04-28 23:05;backyard;0;average;average;waning crescent;19;NW;6;1;-8;M65, M66, Struve 1689
+2022-04-30 14:35;2022-04-30 15:35;backyard;0;below average;above average;new moon;4;W;13;12;-5;Sun
+2022-08-02 21:34;2022-08-02 23:03;backyard;0;average;average;waxing crescent;12;NW;19;19;13;M13, M57, M92
+2022-08-05 21:00;2022-08-06 00:10;backyard;0;average;above average;waxing gibbous;7;E;26;31;15;Moon, M56, M11, M71, Saturn
+2022-09-24 21:01;2022-09-24 22:28;backyard;0;average;average;waning gibbous;15;W;14;14;6;Saturn, M13, M92, Jupiter
+2022-10-04 21:10;2022-10-04 23:39;backyard;0;above average;above average;waxing gibbous;1;SW;5;5;2;Saturn, Jupiter, M34, HJ 1123, HJ 2155
+2022-10-11 19:38;2022-10-12 00:08;backyard;0;average;average;waning gibbous;5;SW;11;10;4;Saturn, Jupiter, NGC 7789, NGC 225, M103, Struve 131, NGC 663, Struve 135, NGC 637, NGC 654, NGC 659, NGC 6543, Moon
+2022-11-02 20:53;2022-11-02 22:28;backyard;0;below average;above average;waxing gibbous;4;SE;5;4;-2;Jupiter, Saturn, M31, Moon
+2022-12-08 18:34;2022-12-08 21:10;backyard;0;average;average;waning gibbous;6;E;0;-2;-5;Jupiter, M31, M32, Mars, M45, M42
+2023-02-06 19:25;2023-02-06 21:35;backyard;0;average;average;waning gibbous;0;W;-10;-11;-14;NGC 2392, M35
+2023-02-14 20:38;2023-02-14 22:55;backyard;0;below average;below average;waning crescent;6;S;2;0;-6;C/2022 E3, Sigma Orionis, Struve 761, M42, NGC 2244, Epsilon Monocerotis
+2023-02-20 20:06;2023-02-20 21:55;backyard;0;average;below average;waxing crescent;13;NW;-2;-8;-10;Meissa, Alnitak, Mintaka
+2023-03-06 20:32;2023-03-06 22:19;backyard;0;above average;below average;full moon;14;W;-1;-6;-9;M44, 24 Cancri, M67
+2023-03-09 20:56;2023-03-09 21:50;backyard;2;below average;average;waning gibbous;10;NW;-1;-6;-6;Mars
+2023-03-24 21:55;2023-03-24 23:40;backyard;5;average;average;waxing crescent;4;W;1;-4;-8;M67, Castor, Algieba, M81, M82
+2023-03-28 21:07;2023-03-28 23:30;backyard;5;below average;average;first quarter;7;W;1;-5;-6;Venus, Mars, Iota Cancri, Phi-2 Cancri, 53 Cancri, 57 Cancri
+2023-03-30 21:24;2023-03-30 23:02;backyard;2;below average;average;waxing gibbous;5;SW;-3;-7;-11;Sigma 1689
+2023-04-02 20:59;2023-04-02 21:50;backyard;0;below average;average;waxing gibbous;10;SW;-3;-8;-9;Venus, Moon
+2023-04-07 20:56;2023-04-07 23:08;backyard;0;average;below average;waning gibbous;13;W;-1;-4;-9;Venus, M45, M44, Mars, M65, M66, M105, NGC 3384, M81, M82, M94, La Superba
+2023-04-08 22:17;2023-04-08 23:55;backyard;0;average;average;waning gibbous;9;W;2;0;-7;Struve 1689, M49
+2023-04-13 21:05;2023-04-13 22:55;backyard;9;below average;below average;waning gibbous;12;W;22;22;8;Venus, M53
+2023-04-14 21:06;2023-04-14 22:58;backyard;0;average;below average;waning gibbous;14;NE;14;14;-1;Venus, Mars, Castor, Mizar, M105
+2023-04-16 21:03;2023-04-16 23:15;backyard;5;below average;below average;waning crescent;18;NE;18;18;7;Venus, Porrima, M60, M59, M89
+2023-04-20 13:44;2023-04-20 14:44;backyard;0;average;average;new moon;9;W;7;5;-6;Sun
+2023-04-27 21:37;2023-04-27 23:09;backyard;33;poor;average;waning gibbous;2;E;8;8;-3;Venus, M64
+2023-05-09 21:28;2023-05-09 23:00;backyard;1;below average;average;waning gibbous;12;W;14;14;-3;Venus, Mars, Cor Caroli, Porrima, M3
+2023-05-10 21:25;2023-05-10 23:00;backyard;0;below average;average;waning gibbous;12;W;19;19;4;Venus, Izar, Pi Bootes, Xi Bootes
+2023-05-14 21:24;2023-05-14 22:30;backyard;0;below average;below average;waning gibbous;12;W;15;15;-2;Venus, Zeta Coronae Borealis, Alkalurops, Izar
+2023-05-18 21:42;2023-05-18 22:45;backyard;0;below average;average;new moon;6;W;12;12;-1;Venus, Mars, Polaris, Cor Caroli, Mizar
+2023-05-21 21:38;2023-05-21 23:12;backyard;0;below average;below average;waxing moon;10;NW;13;15;4;Venus, NGC 4754, NGC 4762, M49
+2023-05-22 21:15;2023-05-22 23:55;backyard;0;average;above average;waxing crescent;2;;12;12;-1;Moon, Izar, NGC 4754, NGC 4762, M49, NGC 4526
