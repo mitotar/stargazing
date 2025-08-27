@@ -1,0 +1,55 @@
+nav {
+    height: 4rem;
+}
+
+body {
+    background-color: #eaecee;
+    width: 100%;
+}
+
+#header,
+#header * {
+    color: darkgray;
+}
+
+#header .current-page,
+#header a.current-page:visited {
+    color: white;
+}
+
+#footer {
+    background-color: black;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2.8rem; /* Footer height */
+}
+
+#page-container {
+    position: relative;
+    min-height: 100vh;
+}
+
+#content {
+    padding-bottom: 2.8rem; /* Footer height */
+}
+
+.card {
+    border-radius: 10px;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card-link,
+.card-link:link,
+.card-link:visited,
+.card-link:hover,
+.card-link:active {
+    color:black;
+}
+
+a.disabled {
+    pointer-events: none;
+}
