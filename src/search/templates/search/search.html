@@ -1,0 +1,85 @@
+{% extends "layout.html" %}
+
+{% block link %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stargazing.css') }}">
+<script> <!-- prevent form resubmission -->
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+</script>
+{% endblock link %}
+
+{% block header %}
+{% include "header.html" %}
+{% endblock %}
+
+{% block title %}
+<h2 class="text-center mb-5">Search</h2>
+{% endblock title %}
+
+{% block content %}
+<!-- Column search -->
+<div class="row border border-dark p-4 mb-5">
+    <div class="col-4 text-center">
+        <form id="col-search" method="post" action="#" autocomplete="off">
+            <div class="row mb-3">
+                <label class="col-form-label col-3" for="col-name">Column</label>
+                <div class="col-auto">
+                    <select class="custom-select" id="col-name" name="col-name" style="width:14em">
+                        <option selected value></option>
+                        {% for v in columns %}
+                        <option value="{{v}}">{{v}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+    </div>
+    <div class="col-auto">
+        <div class="font-weight-bold">
+            {{col}}
+        </div>
+    </div>
+    <div class="col">
+        <div class="row">
+            <div class="d-flex flex-row justify-content-start">
+                {% for i in col_result|batch(4) %}
+                <ul class="mb-0 pl-0 pr-4">
+                    {% for k, v in i %}
+                    <li style="list-style-type: none; margin-bottom: 3px;">
+                        {{k}}: {{v}}
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SQL search -->
+<div class="row border border-dark p-4 mb-5">
+    <div class="col-4 text-center">
+        <form id="sql-search" method="post" action="#" autocomplete="off">
+            <div class="row mb-3">
+                <label class="col-form-label col-3" for="sql-query">Query</label>
+                <div class="col">
+                    <input type="text" class="form-control" id="sql-query" name="sql-query" style="width:10em">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Execute</button>
+        </form>
+    </div>
+    <div class="col">
+        <div class="row">
+            <div class="d-flex flex-row justify-content-start">
+                {{sql_result}}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
