@@ -1,0 +1,167 @@
+{% extends "layout.html" %}
+
+{% block link %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stargazing.css') }}">
+<script> <!-- prevent form resubmission -->
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
+    }
+
+    function update_end_time() {
+        var start = document.getElementById("start-time");
+        document.getElementById("end-time").value = start.value;
+    }
+</script>
+{% endblock link %}
+
+{% block header %}
+{% include "header.html" %}
+{% endblock %}
+
+{% block title %}
+<h2 class="text-center mb-5">Add Session</h2>
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <form class="border border-dark p-4" method="post" action="#" autocomplete="off">
+        <div class="row">
+            <div class="col">
+                <div class="row mb-3">
+                    <label class="col-form-label col-3" for="location">Location</label>
+                    <div class="col">
+                        <input type="text" value="backyard" class="form-control" id="location" name="location"
+                            style="width:10em">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-form-label col-3" for="cloud-cover">Cloud cover</label>
+                    <div class="col-3 mr-0 pr-1">
+                        <input type="number" min="0" max="100" step="1" class="form-control" id="cloud-cover"
+                            name="cloud-cover">
+                    </div>
+                    <div class="col col-form-label mx-0 px-0">
+                        %
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-form-label col-3" for="transparency">Transparency</label>
+                    <div class="col">
+                        <select class="custom-select" id="transparency" name="transparency" style="width:11em">
+                            <option selected value></option>
+                            {% for v in transparency %}
+                            <option value="{{v}}">{{v}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-form-label col-3" for="seeing">Seeing</label>
+                    <div class="col">
+                        <select class="custom-select" id="seeing" name="seeing" style="width:11em">
+                            <option selected value></option>
+                            {% for v in seeing %}
+                            <option value="{{v}}">{{v}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-form-label col-3" for="moon-phase">Moon phase</label>
+                    <div class="col">
+                        <select class="custom-select" id="moon-phase" name="moon-phase" style="width:11em">
+                            <option selected value></option>
+                            {% for v in moon_phases %}
+                            <option value="{{v}}">{{v}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-1 col-form-label px-0 mx-0">
+                                (
+                            </div>
+                            <div class="col-5 px-0 mx-0">
+                                <input type="number" min="0" max="29" class="form-control" id="moon-days"
+                                    name="moon-days">
+                            </div>
+                            <div class="col-6 col-form-label">
+                                days)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="row mb-3">
+                    <label class="col-form-label col-3" class="text-right" for="start-time">Start time</label>
+                    <div class="col-5">
+                        <input type="datetime" value="{{now}}" class="form-control" id="start-time" name="start-time"
+                            onkeyup="update_end_time()">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-form-label col-3" for="end-time">End time</label>
+                    <div class="col-5">
+                        <input type="datetime" value="{{now}}" class="form-control" id="end-time" name="end-time">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-form-label col-3" for="wind-speed">Wind</label>
+                    <div class="col-3 mr-0 pr-1">
+                        <input type="number" step="1" min="0" class="form-control" id="wind-speed" name="wind-speed">
+                    </div>
+                    <div class="col-1 col-form-label mx-0 px-0">
+                        km/h
+                    </div>
+                    <div class="col-2">
+                        <select class="custom-select" id="wind-direction" name="wind-direction" style="width:5em">
+                            <option selected value></option>
+                            {% for v in wind_directions %}
+                            <option value="{{v}}">{{v}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-form-label col-3" for="temperature">Temperature</label>
+                    <div class="col" style="width:1em">
+                        <input type="number" step="1" class="form-control" id="temperature" name="temperature">
+                    </div>
+                    <div class="col-2 col-form-label px-0 mx-0">
+                        (feels like
+                    </div>
+                    <div class="col px-0 mx-0" style="width:1em">
+                        <input type="number" step="1" class="form-control" id="feels-like" name="feels-like">
+                    </div>
+                    <div class="col col-form-label">
+                        ) &deg;C
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-form-label col-3" for="dew-point">Dew point</label>
+                    <div class="col-3 mr-0 pr-1">
+                        <input type="number" step="1" class="form-control" id="dew-point" name="dew-point">
+                    </div>
+                    <div class="col col-form-label mx-0 px-0">
+                        &deg;C
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mt-5">
+            <label class="col-form-label col-1 mr-5" for="objects">Objects</label>
+            <div class="col ml-2">
+                <input type="text" class="form-control overflow-visible" id="objects" name="objects">
+            </div>
+        </div>
+
+        <div class="row justify-content-center pb-0 mt-5">
+            <button type="submit" class="btn btn-primary form-group row">Add</button>
+        </div>
+    </form>
+</div>
+{% endblock content %}

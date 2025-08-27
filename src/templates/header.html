@@ -1,0 +1,27 @@
+<nav id="header" class="navbar navbar-expand-lg bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand {{'current-page' if request.path == '/' }}" href="{{ url_for('overview.overview') }}">Stargazing
+            Sessions</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link {{'current-page' if request.url_rule.endpoint == 'objects.objects' }}"
+                        href="{{ url_for('objects.objects') }}">Objects</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link {{'current-page' if request.url_rule.endpoint == 'add_session.add_session' }}"
+                        href="{{ url_for('add_session.add_session') }}">Add
+                        Session</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link {{'current-page' if request.url_rule.endpoint == 'search.search' }}"
+                        href="{{ url_for('search.search') }}">Search</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
