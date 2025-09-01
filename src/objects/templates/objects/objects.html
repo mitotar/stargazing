@@ -3,6 +3,7 @@
 {% block link %}
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stargazing.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='form.css') }}">
 <script> <!-- prevent form resubmission -->
     if (window.history.replaceState) {
         window.history.replaceState(null, null, window.location.href);
@@ -22,19 +23,37 @@
 <div class="row border border-dark p-4 mb-5">
     <div class="col-3 text-center">
         <form method="post" action="#" autocomplete="off">
+            {{ form.csrf_token }}
+        {% if form.form_errors %}
+        <div class="row">
+            <ul class="errors">
+                {% for error in form.form_errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
             <div class="row mb-3">
-                <label class="col-form-label col-3" for="object">Object</label>
-                <div class="col">
-                    <input type="text" class="form-control" id="object" name="object" style="width:10em">
-                </div>
+                {{ form.object.label(class='col-form-label col-3') }} {{ form.object(class='form-control w-em-m') }}
             </div>
 
             <button type="submit" class="btn btn-primary">Search</button>
         </form>
     </div>
+    {% if form.errors%}
+    <div class="row">
+        <ul class="errors">
+            {% for field_name, field_errors in form.errors|dictsort if field_name %}
+            {% for error in field_errors %}
+                <li>'{{ form[field_name].data }}': {{ error }}</li>
+            {% endfor %}
+            {% endfor %}
+        </ul>
+    </div>
+    {% elif form.object.data %}
     <div class="col-auto">
         <div class="font-weight-bold">
-            {{object}}
+            {{object}}:
         </div>
     </div>
     <div class="col">
@@ -52,13 +71,14 @@
             </div>
         </div>
     </div>
+    {% endif %}
 </div>
 
 <div class="row">
-    {% for o in objects %}
+    {% for category in categories %}
     <div class="col px-4">
         <div class="row">
-            {{names[loop.index0]}}: {{o|length}} found
+            {{category}}: {{objects[category]|length}} found
         </div>
         <div class="row">
             <table class="table table-striped table-bordered table-sm w-100">
@@ -70,11 +90,11 @@
                     </tr>
                 </thead>
                 <tbody class="table-striped">
-                    {% for k,v in o.items() %}
+                    {% for name, dates in objects[category].items() %}
                     <tr>
-                        <td class="font-weight-bold">{{k}}</td>
-                        <td>{{v[0]}}</td>
-                        <td>{{counts[k]}}</td>
+                        <td class="font-weight-bold">{{name}}</td>
+                        <td>{{dates[0]}}</td>
+                        <td>{{counts[name]}}</td>
                     </tr>
                     {% endfor %}
                 </tbody>

@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template
 import os
+import time
 
 from src.overview.year_heatmap import create_calendar_heatmaps
 from src.overview.frequency_table import create_frequency_table
@@ -23,8 +24,11 @@ def overview():
     col_res = ""
 
     if _create_components():
-        app.logger.debug('Recreating heatmap.')
+        app.logger.debug('Recreating heatmaps.')
+        start = time.time()
         create_calendar_heatmaps(DF)  # create bokeh html file
+        end = time.time()
+        app.logger.debug(f'It took {((end - start) * 1000):.2f} ms to create heatmaps.')
         app.config["RELOAD_HEATMAP"] = False
 
     _freq_table = create_frequency_table(DF)

@@ -1,0 +1,15 @@
+form label {
+    font-weight: bold;
+}
+
+.w-em-s {
+    width: 5em;
+}
+
+.w-em-m {
+    width: 11em;
+}
+
+.errors {
+    color: red;
+}

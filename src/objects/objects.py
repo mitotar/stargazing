@@ -1,10 +1,17 @@
 from flask import Blueprint, render_template, request
+import time
+import string
 
-from src.objects.objects_table import create_objects_table, get_object_category
+from src.objects.objects_table import group_objects, get_object_category, OBJECT_CATEGORIES
+from src.objects.object_form import ObjectForm
 from src import app
 
 
 objects_bp = Blueprint('objects',  __name__, url_prefix='/objects', template_folder='templates', static_folder='static')
+_MESSIER_CATEGORY = "Messier Catalogue"
+_NCG_CATEGORY = "New General Catalogue"
+_SSO_CATEGORY = "Solar System Objects"
+_OTHER_CATEGORY = "Other Objects"
 
 @objects_bp.route("/objects.html", methods=["POST", "GET"])
 def objects():
@@ -12,16 +19,26 @@ def objects():
 
     from src import DF
 
-    objects = create_objects_table(DF)
-    names = ["Messier Catalogue", "New General Catalogue",
-             "Solar System Objects", "Other Objects"]
+    start = time.time()
+    (objects, counts) = group_objects(DF) # ({messier, ngc, sso, other}, all)
+    end = time.time()
+    app.logger.debug(f'It took {((end - start) * 1000):.2f} ms to group objects.')
 
     dates = []
     object = ""
+    form = ObjectForm(counts.keys())
     if request.method == "POST":
-        object = request.form["object"]
-        object_type = get_object_category(object)
-        dates = objects[object_type].get(object, ["Object not found."])
-        object = object + ":"
+        object = form.object.data
+        if not form.validate_on_submit():
+            app.logger.debug(f'\'{object}\' is not a known object.')
+        else:
+            category = get_object_category(object)
+            if category == _SSO_CATEGORY and object.lower() != 'iss' or category == _OTHER_CATEGORY:
+                object = string.capwords(object)
+            else:
+                object = object.upper()
 
-    return render_template("objects/objects.html", objects=objects[:-1], names=names, dates=dates, object=object, counts=objects[-1])
+            app.logger.debug(f'Getting dates for object \'{object}\'.')
+            dates = objects[category][object]
+
+    return render_template("objects/objects.html", form=form, objects=objects, categories=OBJECT_CATEGORIES, dates=dates, object=object, counts=counts)

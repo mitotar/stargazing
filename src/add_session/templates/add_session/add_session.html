@@ -3,14 +3,15 @@
 {% block link %}
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='stargazing.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='form.css') }}">
 <script> <!-- prevent form resubmission -->
     if (window.history.replaceState) {
         window.history.replaceState(null, null, window.location.href);
     }
 
     function update_end_time() {
-        var start = document.getElementById("start-time");
-        document.getElementById("end-time").value = start.value;
+        var start = document.getElementById("start_time");
+        document.getElementById("end_time").value = start.value;
     }
 </script>
 {% endblock link %}
@@ -25,28 +26,54 @@
 
 {% block content %}
 <div class="container">
-    <form class="border border-dark p-4" method="post" action="#" autocomplete="off">
+    <form class="border border-dark p-4" method="POST" action="#" autocomplete="off">
+        {{ form.csrf_token }}
+        {% if form.form_errors %}
+        <div class="row">
+            <ul class="errors">
+                {% for error in form.form_errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        {% if form.errors%}
+            <div class="row">
+                <ul class="errors">
+                    {% for field_name, field_errors in form.errors|dictsort if field_name %}
+                    {% for error in field_errors %}
+                        <li>{{ form[field_name].label }}: {{ error }}</li>
+                    {% endfor %}
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
         <div class="row">
             <div class="col">
                 <div class="row mb-3">
-                    <label class="col-form-label col-3" for="location">Location</label>
-                    <div class="col">
-                        <input type="text" value="backyard" class="form-control" id="location" name="location"
+                    {{ form.location.label(class='col-form-label col-3') }} {{ form.location(class='form-control w-em-m
+                    w-em-m') }}
+                    <!-- <div class="col">
+                        <input type="text" value="backyard" class="form-control w-em-m" id="{{ form.location.id|safe }}" name="{{ form.location.name|safe }}"
                             style="width:10em">
-                    </div>
+                    </div> -->
                 </div>
                 <div class="row mb-3">
-                    <label class="col-form-label col-3" for="cloud-cover">Cloud cover</label>
+                    {{ form.cloud_cover.label(class='col-form-label col-3') }} {{ form.cloud_cover(class='form-control
+                    w-em-m') }}
+                    <!-- <label class="col-form-label col-3" for="{{ form.cloud_cover.id|safe }}">{{form.cloud_cover.short_name}}</label>
                     <div class="col-3 mr-0 pr-1">
-                        <input type="number" min="0" max="100" step="1" class="form-control" id="cloud-cover"
-                            name="cloud-cover">
-                    </div>
+                        <input type="number" min="0" max="100" step="1" class="form-control w-em-m" id="{{ form.cloud_cover.id|safe }}"
+                            name="{{ form.cloud_cover.name|safe }}">
+                    </div> -->
                     <div class="col col-form-label mx-0 px-0">
                         %
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label class="col-form-label col-3" for="transparency">Transparency</label>
+                    {{ form.transparency.label(class='col-form-label col-3') }} {{
+                    form.transparency(class='custom-select w-em-m') }}
+                    <!-- <label class="col-form-label col-3" for="transparency">Transparency</label>
                     <div class="col">
                         <select class="custom-select" id="transparency" name="transparency" style="width:11em">
                             <option selected value></option>
@@ -54,10 +81,12 @@
                             <option value="{{v}}">{{v}}</option>
                             {% endfor %}
                         </select>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="row mb-3">
-                    <label class="col-form-label col-3" for="seeing">Seeing</label>
+                    {{ form.seeing.label(class='col-form-label col-3') }} {{ form.seeing(class='custom-select w-em-m')
+                    }}
+                    <!-- <label class="col-form-label col-3" for="seeing">Seeing</label>
                     <div class="col">
                         <select class="custom-select" id="seeing" name="seeing" style="width:11em">
                             <option selected value></option>
@@ -65,10 +94,12 @@
                             <option value="{{v}}">{{v}}</option>
                             {% endfor %}
                         </select>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="row mb-3">
-                    <label class="col-form-label col-3" for="moon-phase">Moon phase</label>
+                    {{ form.moon_phase.label(class='col-form-label col-3') }} {{ form.moon_phase(class='form-control
+                    w-em-m') }}
+                    <!-- <label class="col-form-label col-3" for="moon-phase">Moon phase</label>
                     <div class="col">
                         <select class="custom-select" id="moon-phase" name="moon-phase" style="width:11em">
                             <option selected value></option>
@@ -76,15 +107,16 @@
                             <option value="{{v}}">{{v}}</option>
                             {% endfor %}
                         </select>
-                    </div>
+                    </div> -->
                     <div class="col">
                         <div class="row">
                             <div class="col-1 col-form-label px-0 mx-0">
                                 (
                             </div>
                             <div class="col-5 px-0 mx-0">
-                                <input type="number" min="0" max="29" class="form-control" id="moon-days"
-                                    name="moon-days">
+                                {{ form.moon_age(class='form-control w-em-s') }}
+                                <!-- <input type="number" min="0" max="29" class="form-control w-em-m" id="moon-days"
+                                    name="moon-days"> -->
                             </div>
                             <div class="col-6 col-form-label">
                                 days)
@@ -96,55 +128,67 @@
 
             <div class="col">
                 <div class="row mb-3">
-                    <label class="col-form-label col-3" class="text-right" for="start-time">Start time</label>
+                    {{ form.start_time.label(class='col-form-label col-3') }} {{ form.start_time(class='form-control
+                    w-em-m', onkeyup='update_end_time()') }}
+                    <!-- <label class="col-form-label col-3" class="text-right" for="start-time">Start time</label>
                     <div class="col-5">
-                        <input type="datetime" value="{{now}}" class="form-control" id="start-time" name="start-time"
+                        <input type="datetime" value="{{now}}" class="form-control w-em-m" id="start-time" name="start-time"
                             onkeyup="update_end_time()">
-                    </div>
+                    </div> -->
                 </div>
                 <div class="row mb-3">
-                    <label class="col-form-label col-3" for="end-time">End time</label>
+                    {{ form.end_time.label(class='col-form-label col-3') }} {{ form.end_time(class='form-control
+                    w-em-m') }}
+                    <!-- <label class="col-form-label col-3" for="end-time">End time</label>
                     <div class="col-5">
-                        <input type="datetime" value="{{now}}" class="form-control" id="end-time" name="end-time">
-                    </div>
+                        <input type="datetime" value="{{now}}" class="form-control w-em-m" id="end-time" name="end-time">
+                    </div> -->
                 </div>
                 <div class="row mb-3">
-                    <label class="col-form-label col-3" for="wind-speed">Wind</label>
+                    {{ form.wind_speed.label(class='col-form-label col-3') }} {{ form.wind_speed(class='form-control
+                    w-em-s') }}
+                    <!-- <label class="col-form-label col-3" for="wind-speed">Wind</label>
                     <div class="col-3 mr-0 pr-1">
-                        <input type="number" step="1" min="0" class="form-control" id="wind-speed" name="wind-speed">
-                    </div>
+                        <input type="number" step="1" min="0" class="form-control w-em-m" id="wind-speed" name="wind-speed">
+                    </div> -->
                     <div class="col-1 col-form-label mx-0 px-0">
                         km/h
                     </div>
                     <div class="col-2">
-                        <select class="custom-select" id="wind-direction" name="wind-direction" style="width:5em">
+                        {{ form.wind_direction(class='custom-select w-em-s') }}
+                        <!-- <select class="custom-select" id="wind-direction" name="wind-direction" style="width:5em">
                             <option selected value></option>
                             {% for v in wind_directions %}
                             <option value="{{v}}">{{v}}</option>
                             {% endfor %}
-                        </select>
+                        </select> -->
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label class="col-form-label col-3" for="temperature">Temperature</label>
+                    {{ form.temperature.label(class='col-form-label col-3') }} {{ form.temperature(class='form-control
+                    w-em-s') }}
+                    <!-- <label class="col-form-label col-3" for="temperature">Temperature</label>
                     <div class="col" style="width:1em">
-                        <input type="number" step="1" class="form-control" id="temperature" name="temperature">
-                    </div>
+                        <input type="number" step="1" class="form-control w-em-m" id="temperature" name="temperature">
+                    </div> -->
                     <div class="col-2 col-form-label px-0 mx-0">
                         (feels like
                     </div>
                     <div class="col px-0 mx-0" style="width:1em">
-                        <input type="number" step="1" class="form-control" id="feels-like" name="feels-like">
+                        {{ form.temperature_feels_like(class='form-control w-em-s') }}
+                        <!-- <input type="number" step="1" class="form-control w-em-m" id="feels-like" name="feels-like"> -->
                     </div>
                     <div class="col col-form-label">
                         ) &deg;C
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label class="col-form-label col-3" for="dew-point">Dew point</label>
+                    {{ form.dew_point.label(class='col-form-label col-3') }} {{ form.dew_point(class='form-control
+                    w-em-m') }}
+                    <!-- <label class="col-form-label col-3" for="dew-point">Dew point</label>
                     <div class="col-3 mr-0 pr-1">
-                        <input type="number" step="1" class="form-control" id="dew-point" name="dew-point">
-                    </div>
+                        <input type="number" step="1" class="form-control w-em-m" id="dew-point" name="dew-point">
+                    </div> -->
                     <div class="col col-form-label mx-0 px-0">
                         &deg;C
                     </div>
@@ -153,10 +197,12 @@
         </div>
 
         <div class="row justify-content-center mt-5">
-            <label class="col-form-label col-1 mr-5" for="objects">Objects</label>
+            {{ form.objects.label(class='col-form-label col-1 mr-5') }} {{ form.objects(class='form-control
+            overflow-visible') }}
+            <!-- <label class="col-form-label col-1 mr-5" for="objects">Objects</label>
             <div class="col ml-2">
-                <input type="text" class="form-control overflow-visible" id="objects" name="objects">
-            </div>
+                <input type="text" class="form-control w-em-m overflow-visible" id="objects" name="objects">
+            </div> -->
         </div>
 
         <div class="row justify-content-center pb-0 mt-5">

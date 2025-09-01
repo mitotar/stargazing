@@ -1,7 +1,8 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, flash
 from datetime import datetime
 
 from src.add_session.fileio import write_entry_to_file
+from src.add_session.add_session_form import AddSessionForm
 from src.enum import Seeing, Transparency, MoonPhase, WindDirection
 from src import app
 
@@ -12,17 +13,16 @@ add_session_bp = Blueprint('add_session',  __name__, url_prefix='/add_session', 
 def add_session():
     app.logger.debug('Loading add session page.')
 
-    from src import DF
+    form = AddSessionForm()
 
     if request.method == "POST":
-        form = request.form.to_dict()
-        write_entry_to_file(form)
-        app.config["RELOAD_HEATMAP"] = True
-        app.logger.info(f'Created a session for {form["start-time"]}.')
+        if not form.validate_on_submit():
+            app.logger.debug(f'Session not saved. Invalid entries.')
+        else:
+            form_data = request.form.to_dict()
+            write_entry_to_file(form_data, app.config['CSV_FILE'])
+            app.config['RELOAD_HEATMAP'] = True
+            app.logger.info(f'Created a session for {form_data["start_time"]}.')
+            flash('Session created!', 'success')
 
-    return render_template("add_session/add_session.html", 
-                           transparency=[t.value for t in Transparency], 
-                           seeing=[s.value for s in Seeing],
-                           moon_phases=[m.value for m in MoonPhase], 
-                           wind_directions=[w.value for w in WindDirection], 
-                           now=str(datetime.now())[:16]) # cut off seconds for datetime
+    return render_template("add_session/add_session.html", form=form)
